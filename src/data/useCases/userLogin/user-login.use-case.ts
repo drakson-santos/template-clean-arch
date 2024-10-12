@@ -1,3 +1,5 @@
+import { MESSAGES } from "@/constants/messages.enum";
+import { REGEX_PATTERNS } from "@/constants/regex.enum";
 import type { IUserService } from "@/domain/services/user/user.services";
 import type { IUserLogin } from "@/domain/useCases/userLogin/user-login.use-case";
 
@@ -5,21 +7,17 @@ export class UserLoginUseCase {
 	constructor(private readonly userService: IUserService) {}
 
 	private validateEmail(email: string): void {
-		if (!email) throw new Error("Email is required.");
+		if (!email) throw new Error(MESSAGES.EMAIL_REQUIRED);
 
-		const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-		if (!emailPattern.test(email)) throw new Error("Invalid email format.");
+		if (!REGEX_PATTERNS.EMAIL.test(email))
+			throw new Error(MESSAGES.INVALID_EMAIL_FORMAT);
 	}
 
 	private validatePassword(password: string): void {
-		if (!password) throw new Error("Password is required.");
+		if (!password) throw new Error(MESSAGES.PASSWORD_REQUIRED);
 
-		const strongPasswordPattern =
-			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
-		if (!strongPasswordPattern.test(password)) {
-			throw new Error(
-				"Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character.",
-			);
+		if (!REGEX_PATTERNS.STRONG_PASSWORD.test(password)) {
+			throw new Error(MESSAGES.WEAK_PASSWORD);
 		}
 	}
 

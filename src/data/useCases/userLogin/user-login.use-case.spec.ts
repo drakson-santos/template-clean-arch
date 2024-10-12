@@ -1,3 +1,4 @@
+import { MESSAGES } from "@/constants/messages.enum";
 import { UserInMemoryService } from "@/data/services/user/user.in-memory.service";
 import type { IUserService } from "@/domain/services/user/user.services";
 import type { IUserLogin } from "@/domain/useCases/userLogin/user-login.use-case";
@@ -44,10 +45,10 @@ describe("UserLogin", () => {
 		const { sut, UserSpyWithoutEmail, UserSpyWithoutPassword } = sutFactory();
 
 		await expect(sut.login(UserSpyWithoutEmail)).rejects.toThrow(
-			"Email is required.",
+			MESSAGES.EMAIL_REQUIRED,
 		);
 		await expect(sut.login(UserSpyWithoutPassword)).rejects.toThrow(
-			"Password is required.",
+			MESSAGES.PASSWORD_REQUIRED,
 		);
 	});
 
