@@ -1,10 +1,10 @@
-import { UserService } from "@/data/services/user/user-service";
-import type { IUserService } from "@/domain/services/user/user-services";
-import type { IUserLogin } from "@/domain/useCases/userLogin/user-login";
-import { UserLogin } from "./user-login";
+import { UserService } from "@/data/services/user/user.service";
+import type { IUserService } from "@/domain/services/user/user.services";
+import type { IUserLogin } from "@/domain/useCases/userLogin/user-login.use-case";
+import { UserLoginUseCase } from "./user-login.use-case";
 
 type SutInstances = {
-	sut: UserLogin;
+	sut: UserLoginUseCase;
 	service: IUserService;
 	UserSpyWithoutEmail: IUserLogin.User;
 	UserSpyWithoutPassword: IUserLogin.User;
@@ -12,7 +12,7 @@ type SutInstances = {
 
 const sutFactory = (): SutInstances => {
 	const service = new UserService();
-	const sut = new UserLogin(service);
+	const sut = new UserLoginUseCase(service);
 
 	const UserSpyWithoutEmail: IUserLogin.User = {
 		email: "", // Invalid email

@@ -1,4 +1,4 @@
-import type { IUserService } from "@/domain/services/user/user-services";
+import type { IUserService } from "@/domain/services/user/user.services";
 
 export class UserService implements IUserService {
 	async loginBy(email: string, password: string): Promise<void> {
