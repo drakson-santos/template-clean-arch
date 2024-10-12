@@ -1,24 +1,7 @@
-import type { IUserLogin } from "@/domain/useCases/IUserLogin";
-
-class UserLogin {
-	constructor(private readonly userService: IUserService) {}
-
-	loginBy(user: IUserLogin.User): Promise<void> {
-		return this.userService.loginBy(user.email, user.password);
-	}
-}
-
-interface IUserService {
-	loginBy(email: string, password: string): Promise<void>;
-}
-
-class UserService implements IUserService {
-	async loginBy(email: string, password: string): Promise<void> {
-		if (!email) throw new Error("Email is required.");
-		if (!password) throw new Error("Password is required.");
-		throw new Error("Method not implemented.");
-	}
-}
+import { UserService } from "@/data/services/user/user-service";
+import type { IUserService } from "@/domain/services/user/user-services";
+import type { IUserLogin } from "@/domain/useCases/userLogin/user-login";
+import { UserLogin } from "./user-login";
 
 type SutInstances = {
 	sut: UserLogin;
