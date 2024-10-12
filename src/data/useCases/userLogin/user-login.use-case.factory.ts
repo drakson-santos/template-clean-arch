@@ -1,4 +1,4 @@
-import { UserService } from "@/data/services/user/user.service";
+import { UserService } from "@/data/services/user/user.http.service";
 import { UserLoginUseCase } from "./user-login.use-case";
 
 // biome-ignore lint/complexity/noStaticOnlyClass: <explanation>

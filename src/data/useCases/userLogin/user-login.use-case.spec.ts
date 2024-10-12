@@ -1,4 +1,4 @@
-import { UserService } from "@/data/services/user/user.service";
+import { UserInMemoryService } from "@/data/services/user/user.in-memory.service";
 import type { IUserService } from "@/domain/services/user/user.services";
 import type { IUserLogin } from "@/domain/useCases/userLogin/user-login.use-case";
 import { UserLoginUseCase } from "./user-login.use-case";
@@ -11,7 +11,7 @@ type SutInstances = {
 };
 
 const sutFactory = (): SutInstances => {
-	const service = new UserService();
+	const service = new UserInMemoryService();
 	const useCase = new UserLoginUseCase(service);
 
 	const UserSpyWithoutEmail: IUserLogin.User = {
