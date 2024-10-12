@@ -1,9 +1,9 @@
 export interface IUserLogin {
-	loginBy: (params: IUserLogin.Params) => Promise<void>;
+	loginBy: (user: IUserLogin.User) => Promise<void>;
 }
 
-namespace IUserLogin {
-	export type Params = {
+export namespace IUserLogin {
+	export type User = {
 		email: string;
 		password: string;
 	};
