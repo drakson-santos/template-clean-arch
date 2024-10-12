@@ -12,7 +12,7 @@ type SutInstances = {
 
 const sutFactory = (): SutInstances => {
 	const service = new UserService();
-	const sut = new UserLoginUseCase(service);
+	const useCase = new UserLoginUseCase(service);
 
 	const UserSpyWithoutEmail: IUserLogin.User = {
 		email: "", // Invalid email
@@ -25,7 +25,7 @@ const sutFactory = (): SutInstances => {
 	};
 
 	return {
-		sut,
+		sut: useCase,
 		service,
 		UserSpyWithoutEmail,
 		UserSpyWithoutPassword,
@@ -35,10 +35,10 @@ const sutFactory = (): SutInstances => {
 describe("UserLogin", () => {
 	test("It should not be possible to login without email and password", async () => {
 		const { sut, UserSpyWithoutEmail, UserSpyWithoutPassword } = sutFactory();
-		await expect(sut.loginBy(UserSpyWithoutEmail)).rejects.toThrow(
+		await expect(sut.login(UserSpyWithoutEmail)).rejects.toThrow(
 			"Email is required.",
 		);
-		await expect(sut.loginBy(UserSpyWithoutPassword)).rejects.toThrow(
+		await expect(sut.login(UserSpyWithoutPassword)).rejects.toThrow(
 			"Password is required.",
 		);
 	});

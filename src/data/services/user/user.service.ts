@@ -4,6 +4,7 @@ export class UserService implements IUserService {
 	async loginBy(email: string, password: string): Promise<void> {
 		if (!email) throw new Error("Email is required.");
 		if (!password) throw new Error("Password is required.");
+		// use http client
 		throw new Error("Method not implemented.");
 	}
 }
